@@ -29,7 +29,7 @@ class PostList extends Component {
 									<td>{post.title}</td>
 									<td>{post.body}</td>
 									<td className="user-select-none">
-										<Button color="primary" className="mb-2">
+										<Button color="primary" className="mb-2" onClick={() => this.props.showModal}>
 											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 											     fill="currentColor"
 											     className="bi bi-pencil" viewBox="0 0 16 16">
