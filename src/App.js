@@ -3,7 +3,7 @@ import {Container} from "reactstrap";
 
 
 import PostComponent from "./PostComponent/PostComponent";
-import CategoryComponent from "./CategoryComponent/CategoryComponent";
+// import CategoryComponent from "./CategoryComponent/CategoryComponent";
 
 export default class App extends Component {
 	render() {
@@ -11,7 +11,7 @@ export default class App extends Component {
 			<div className="App">
 				<Container>
 
-					<CategoryComponent/>
+					{/*<CategoryComponent/>*/}
 
 					<PostComponent/>
 

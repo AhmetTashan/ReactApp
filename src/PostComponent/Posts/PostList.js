@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import {Button, Table} from "reactstrap";
 
 class PostList extends Component {
-
 	render() {
 		return (
 			<div>

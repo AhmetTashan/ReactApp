@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Col, Row} from "reactstrap";
-import User from "./User/User";
+import UserList from "./User/UserList";
 import PostList from "./Posts/PostList";
 
 class PostComponent extends Component {
@@ -13,7 +13,6 @@ class PostComponent extends Component {
 		this.getPosts();
 	}
 
-
 	changeUser = user => {
 		if (user)
 			this.setState({currentUser: {id: user.id, name: user.name}})
@@ -23,10 +22,10 @@ class PostComponent extends Component {
 		this.getPosts(user);
 	}
 
-	getPosts = (userId) => {
+	getPosts = (user) => {
 		let postListUrl = 'https://jsonplaceholder.typicode.com/posts';
-		if (userId) {
-			postListUrl += '?userId=' + userId.id;
+		if (user) {
+			postListUrl += '?userId=' + user.id;
 		}
 
 		fetch(postListUrl)
@@ -40,6 +39,10 @@ class PostComponent extends Component {
 			posts: this.state.posts
 		}
 
+		let userInfo = {
+			currentUser: this.state.currentUser,
+		}
+
 		return (
 			<div>
 				<Row className="m-3">
@@ -49,7 +52,7 @@ class PostComponent extends Component {
 				</Row>
 				<Row>
 					<Col xs={4}>
-						<User changeUser={this.changeUser}/>
+						<UserList changeUser={this.changeUser} info={userInfo}/>
 					</Col>
 					<Col xs={8}>
 						<PostList info={postInfo}/>

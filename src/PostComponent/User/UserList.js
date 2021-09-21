@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import {ListGroup, ListGroupItem} from "reactstrap";
 
-class User extends Component {
+class UserList extends Component {
 	state = {
 		users: []
 	}
+
 
 	componentDidMount() { // component yerleşti/yüklendi artık çalıştır
 		this.getUsers();
@@ -16,22 +17,35 @@ class User extends Component {
 			.then(payload => this.setState({users: payload}));
 	}
 
+	setActive = (user) => {
+		// console.log(this.props.info.currentUser)
+		if (this.props.info.currentUser !== undefined) {
+			if (this.props.info.currentUser.id === user.id) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	render() {
 		return (
 			<div>
 				<ListGroup>
 					<ListGroupItem
+						active={this.props.info.currentUser === undefined ? true : false}
 						onClick={() => this.props.changeUser()}
-						style={{cursor: "pointer"}}
-						className="active"
-					>Tümü</ListGroupItem>
+						style={{cursor: "pointer"}}>
+						All Posts
+					</ListGroupItem>
 					{
 						this.state.users.map(user => (
 							<ListGroupItem
+								active={this.setActive(user)}
 								onClick={() => this.props.changeUser(user)}
 								key={user.id}
-								style={{cursor: "pointer"}}
-							>{user.name}</ListGroupItem>
+								style={{cursor: "pointer"}}>
+								{user.name}
+							</ListGroupItem>
 						))
 					}
 				</ListGroup>
@@ -40,4 +54,4 @@ class User extends Component {
 	}
 }
 
-export default User;
+export default UserList;
