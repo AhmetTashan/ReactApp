@@ -50,7 +50,7 @@ class CategoryList extends Component {
 						))
 					}
 				</ListGroup>
-				<h5>{this.props.info.currentCategory}</h5>
+				{/*<h5>{this.props.info.currentCategory}</h5>*/}
 			</div>
 		);
 	}

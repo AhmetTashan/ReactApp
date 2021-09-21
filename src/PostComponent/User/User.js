@@ -13,16 +13,27 @@ class User extends Component {
 	getUsers = () => {
 		fetch("https://jsonplaceholder.typicode.com/users/")
 			.then(response => response.json())
-			.then(data => this.setState({users: data}));
-
-		console.log(this.state.users)
+			.then(payload => this.setState({users: payload}));
 	}
 
 	render() {
 		return (
 			<div>
 				<ListGroup>
-					<ListGroupItem tag="a" href="#">User Name</ListGroupItem>
+					<ListGroupItem
+						onClick={() => this.props.changeUser()}
+						style={{cursor: "pointer"}}
+						className="active"
+					>Tümü</ListGroupItem>
+					{
+						this.state.users.map(user => (
+							<ListGroupItem
+								onClick={() => this.props.changeUser(user)}
+								key={user.id}
+								style={{cursor: "pointer"}}
+							>{user.name}</ListGroupItem>
+						))
+					}
 				</ListGroup>
 			</div>
 		);
