@@ -2,28 +2,19 @@ import React, {Component} from 'react';
 import {Col, Row} from "reactstrap";
 import UserList from "./User/UserList";
 import PostList from "./Posts/PostList";
-import GetPost from "./Posts/GetPost";
 
 class PostComponent extends Component {
 	state = {
 		currentUser: undefined,
 		posts: [],
-		modalStatus: false
+		modalState: false
 	}
 
 	componentDidMount() {
 		this.getPosts();
 	}
 
-	showModal = () => {
-		if (this.state.modalStatus === false) {
-			this.setState({modalStatus: true})
-		} else {
-			this.setState({modalStatus: false})
-		}
 
-		console.log(this.state.modalStatus)
-	}
 
 	changeUser = user => {
 		if (user)
@@ -67,8 +58,6 @@ class PostComponent extends Component {
 						<UserList changeUser={this.changeUser} info={userInfo}/>
 					</Col>
 					<Col xs={8}>
-						<GetPost initialModalState={this.state.modalStatus}/> {/*tıklandığında bu modal çalışsın*/}
-
 						<PostList showModal={this.showModal} info={postInfo}/>
 					</Col>
 				</Row>

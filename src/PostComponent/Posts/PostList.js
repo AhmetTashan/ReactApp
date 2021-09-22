@@ -1,10 +1,38 @@
 import React, {Component} from "react";
 import {Button, Table} from "reactstrap";
+import GetModalPost from "./GetModalPost";
 
 class PostList extends Component {
+
+	state = {
+		isModalOpen: false,
+		modalPostData: undefined
+	}
+
+	toggle = (post) => {
+		if (this.state.isModalOpen === true) {
+			this.setState({
+				isModalOpen: false,
+				modalPostData: undefined
+			});
+		} else if (this.state.isModalOpen === false) {
+			this.setState({
+				isModalOpen: true,
+				modalPostData: post
+			});
+		}
+	};
+
+
 	render() {
+		// let showModalPost = {post: this.state.modalPostData}
 		return (
 			<div>
+				<GetModalPost toggle={this.toggle}
+				              isModalOpen={this.state.isModalOpen}
+				              postData={this.state.modalPostData}/> {/*tıklandığında bu modal çalışsın*/}
+
+
 				{
 					this.props.info.currentUser
 						? <h2>{this.props.info.currentUser.name} <small className="lead"> All Posts</small></h2>
@@ -29,7 +57,9 @@ class PostList extends Component {
 									<td>{post.title}</td>
 									<td>{post.body}</td>
 									<td className="user-select-none">
-										<Button color="primary" className="mb-2" onClick={() => this.props.showModal}>
+										<Button color="primary"
+										        className="mb-2"
+										        onClick={() => this.toggle(post)}>
 											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 											     fill="currentColor"
 											     className="bi bi-pencil" viewBox="0 0 16 16">
